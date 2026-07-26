@@ -1,8 +1,11 @@
-// violation of the Open/Closed Principle: The PaymentProcessor class is not open for extension. If we want to add a new payment method, we have to modify the existing code, which violates the principle.
+// ❌ VIOLATION of the Open/Closed Principle
+// The PaymentProcessor class is NOT open for extension
+// Adding a new payment method requires modifying existing code
+// This violates OCP: "Open for extension, Closed for modification"
 
-
-public class PaymentProcessor {
-    void pay(String method, double amount) {
+class PaymentProcessorViolation {
+    public void pay(String method, double amount) {
+        // Every new payment method requires modifying this method
         if (method.equals("credit_card")) {
             // Process credit card payment
         } else if (method.equals("paypal")) {
@@ -12,35 +15,74 @@ public class PaymentProcessor {
         } else {
             throw new IllegalArgumentException("Unsupported payment method: " + method);
         }
+        // Problem: To add UPI, we must modify this class - VIOLATION!
     }
-    
 }
 
-// Open/Closed Principle: The PaymentProcessor class is open for extension. We can add new payment methods by creating new classes that implement the PaymentMethod interface, without modifying the existing code.
+// ✅ OPEN/CLOSED PRINCIPLE - CORRECT APPROACH
+// The class is open for extension (new payment methods) but closed for modification
+// New payment methods are added by implementing the interface, not modifying existing code
 
+// Step 1: Define the contract that all payment methods must follow
 interface PaymentMethod {
     void pay(double amount);
 }
 
+// Step 2: Implement each payment method by creating new classes
 class CreditCardPayment implements PaymentMethod {
+    @Override
     public void pay(double amount) {
-        // Process credit card payment
+        // Specific implementation for credit card
+        System.out.println("Processing credit card payment: $" + amount);
     }
 }
 
 class PayPalPayment implements PaymentMethod {
+    @Override
     public void pay(double amount) {
-        // Process PayPal payment
-    }
-}
-class UPIPayment implements PaymentMethod {
-    public void pay(double amount) {
-        // Process UPI payment
+        // Specific implementation for PayPal
+        System.out.println("Processing PayPal payment: $" + amount);
     }
 }
 
-class paymentProcessor {
-    void pay(PaymentMethod method, double amount) {
-        method.pay(amount);
+class UPIPayment implements PaymentMethod {
+    @Override
+    public void pay(double amount) {
+        // NEW METHOD: No need to modify PaymentProcessor!
+        System.out.println("Processing UPI payment: $" + amount);
+    }
+}
+
+// Step 3: The PaymentProcessor uses composition with the interface
+// ✅ NOW CLOSED FOR MODIFICATION - No changes needed when adding new payment methods
+public class PaymentProcessor {
+    private PaymentMethod paymentMethod;
+
+    // Constructor injection - allows flexibility
+    public PaymentProcessor(PaymentMethod paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
+
+    // This method never needs to change when adding new payment methods!
+    public void processPayment(double amount) {
+        paymentMethod.pay(amount);
+    }
+}
+
+// Usage Example - Open for extension!
+// To add a new payment method: create class, implement PaymentMethod, done!
+class Main {
+    public static void main(String[] args) {
+        // Credit card payment
+        PaymentProcessor processor1 = new PaymentProcessor(new CreditCardPayment());
+        processor1.processPayment(100);
+
+        // PayPal payment
+        PaymentProcessor processor2 = new PaymentProcessor(new PayPalPayment());
+        processor2.processPayment(50);
+
+        // UPI payment - NEW! No changes to PaymentProcessor needed!
+        PaymentProcessor processor3 = new PaymentProcessor(new UPIPayment());
+        processor3.processPayment(75);
     }
 }
