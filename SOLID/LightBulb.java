@@ -13,6 +13,8 @@ class Switch{
     }
 }
 
+//Real-world scenario: A light switch shouldn't be wired directly to one 
+// specific bulb brand — it should work with any device that fits the "switchable" standard.
 // ✅ Dependency Inversion Principle - CORRECT APPROACH
 // High-level modules should not depend on low-level modules. Both should depend on abstractions.
 //
