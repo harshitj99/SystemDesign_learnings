@@ -1,4 +1,4 @@
-package DesignPatterns.Behavioral;
+package DesignPatterns.Creational;
 
 public class lazySingleton {
     private static lazySingleton instance;

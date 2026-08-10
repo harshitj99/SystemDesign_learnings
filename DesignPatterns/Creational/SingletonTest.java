@@ -1,4 +1,4 @@
-package DesignPatterns.Behavioral;
+package DesignPatterns.Creational;
 
 import java.util.*;
 
