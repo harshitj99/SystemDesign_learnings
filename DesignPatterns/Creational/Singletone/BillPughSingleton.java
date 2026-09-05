@@ -1,4 +1,4 @@
-package DesignPatterns.Creational;
+package DesignPatterns.Creational.Singletone;
 
 //The goal is to get laziness back — "only create it when someone actually asks for it" — without losing 
 //thread safety and without paying the performance cost of synchronized on every call (like ThreadSafeSingleton does)

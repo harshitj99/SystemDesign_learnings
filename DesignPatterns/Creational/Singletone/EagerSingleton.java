@@ -1,4 +1,4 @@
-package DesignPatterns.Creational;
+package DesignPatterns.Creational.Singletone;
 
 public class EagerSingleton {
     private static final EagerSingleton instance = new EagerSingleton();

@@ -1,4 +1,4 @@
-package DesignPatterns.Creational;
+package DesignPatterns.Creational.Singletone;
 
 public class ThreadSafeSingleton {
     private static ThreadSafeSingleton instance;
