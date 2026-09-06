@@ -26,12 +26,12 @@ abstract class Bird {
 }
 
 // Only flying birds implement this interface
-interface Flyable {
+interface IFlyable {
     void fly();
 }
 
 // ✅ Sparrow implements both Bird and Flyable because it can do both
-class Sparrow extends Bird implements Flyable {
+class Sparrow extends Bird implements IFlyable {
     @Override
     public void eat() {
         // Fulfills Bird contract

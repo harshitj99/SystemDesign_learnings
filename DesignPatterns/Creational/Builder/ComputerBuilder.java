@@ -19,7 +19,7 @@ class ComputerImproved {
 
 }
 
-public interface ComputerBuilder {
+interface IComputerBuilder {
   void buildCpu();
   void buildRam();
   void buildStorage();
@@ -29,7 +29,7 @@ public interface ComputerBuilder {
     
 }
 
-class GamingComputerBuilder implements ComputerBuilder{
+class GamingComputerBuilder implements IComputerBuilder{
   private final ComputerImproved computer = new ComputerImproved();
 
   @Override
@@ -53,7 +53,7 @@ class GamingComputerBuilder implements ComputerBuilder{
   }
 }
 
-class OfficeComputerBuilder implements ComputerBuilder{
+class OfficeComputerBuilder implements IComputerBuilder{
     private final ComputerImproved computer = new ComputerImproved();
 
   @Override
@@ -80,7 +80,7 @@ class OfficeComputerBuilder implements ComputerBuilder{
 // Director knows the assembly recipe
 
 class ComputerDirector{
-    void construct(ComputerBuilder builder){
+    void construct(IComputerBuilder builder){
         builder.buildCpu();
         builder.buildGpu();
         builder.buildRam();
@@ -98,7 +98,7 @@ class ComputerBuilderDemo {
         
         // Building a Gaming Computer
         System.out.println("--- Building Gaming Computer ---");
-        ComputerBuilder gamingBuilder = new GamingComputerBuilder();
+        IComputerBuilder gamingBuilder = new GamingComputerBuilder();
         director.construct(gamingBuilder);
         System.out.println(gamingBuilder.getResult());
         // ComputerImproved gamingComputer = gamingBuilder.getResult();
@@ -106,7 +106,7 @@ class ComputerBuilderDemo {
         
         // Building an Office Computer
         System.out.println("\n--- Building Office Computer ---");
-        ComputerBuilder officeBuilder = new OfficeComputerBuilder();
+        IComputerBuilder officeBuilder = new OfficeComputerBuilder();
         director.construct(officeBuilder);
         System.out.println(officeBuilder.getResult());
         // ComputerImproved officeComputer = officeBuilder.getResult();

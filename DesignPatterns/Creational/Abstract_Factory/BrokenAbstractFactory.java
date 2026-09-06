@@ -1,30 +1,30 @@
 package DesignPatterns.Creational.Abstract_Factory;
 
-interface Button{
+interface IButton{
     void render();
 }
-interface Checkbox{
+interface ICheckbox{
     void render();
 }
 
-class WindowsButton implements Button {
+class WindowsButton implements IButton {
     public void render() { System.out.println("Rendering Windows-style button"); }
 }
-class MacButton implements Button {
+class MacButton implements IButton {
     public void render() { System.out.println("Rendering Mac-style button"); }
 }
-class WindowsCheckbox implements Checkbox {
+class WindowsCheckbox implements ICheckbox {
     public void render() { System.out.println("Rendering Windows-style checkbox"); }
 }
-class MacCheckbox implements Checkbox {
+class MacCheckbox implements ICheckbox {
     public void render() { System.out.println("Rendering Mac-style checkbox"); }
 }
 
 // If you use separate factory methods for buttons and checkboxes independently, nothing stops a bug like this:
 public class BrokenAbstractFactory {
     public static void main(String[] args) {
-        Button button = new WindowsButton();
-        Checkbox checkbox = new MacCheckbox();
+        IButton button = new WindowsButton();
+        ICheckbox checkbox = new MacCheckbox();
 
         button.render();
         checkbox.render();

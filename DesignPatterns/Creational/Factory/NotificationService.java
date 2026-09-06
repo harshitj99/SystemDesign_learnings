@@ -1,26 +1,26 @@
 package DesignPatterns.Creational.Factory;
 
 // Product interface
-interface Notification{
+interface INotification{
     void send(String message);
 }
 
 // Concrete Products
-class EmailNotification implements Notification{
+class EmailNotification implements INotification{
     @Override
     public void send(String message){
         System.out.println("Sending EMAIL: " + message);
     }
 }
 
-class SMSNotification implements Notification{
+class SMSNotification implements INotification{
      @Override
     public void send(String message){
         System.out.println("Sending SMS: " + message);
     }
 }
 
-class PushNotification implements Notification{
+class PushNotification implements INotification{
      @Override
     public void send(String message){
         System.out.println("Sending Push: " + message);
@@ -30,28 +30,28 @@ class PushNotification implements Notification{
 // Creator (abstract) — declares the factory method
 abstract class NotificationCreator {
     // the factory method — subclasses decide what gets created
-    abstract Notification createNotification();
+    abstract INotification createNotification();
 // shared logic that uses the created product — lives in ONE place
     void notify(String message){
-        Notification notification = createNotification();
+        INotification notification = createNotification();
         notification.send(message);
     }
 }
 
 class EmailNotificationCreator extends NotificationCreator{
-    Notification createNotification(){
+    INotification createNotification(){
         return new EmailNotification();
     }
 }
 
 class SMSNotificationCreator extends NotificationCreator{
-    Notification createNotification(){
+    INotification createNotification(){
         return new SMSNotification();
     }
 }
 
 class PushNotificationCreator extends NotificationCreator{
-    Notification createNotification(){
+    INotification createNotification(){
         return new PushNotification();
     }
 }

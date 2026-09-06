@@ -18,24 +18,24 @@ class Switch{
 // ✅ Dependency Inversion Principle - CORRECT APPROACH
 // High-level modules should not depend on low-level modules. Both should depend on abstractions.
 //
-interface Switchable {
+interface ISwitchable {
     void turnOn();
 }
 
-class LightBulbV2 implements Switchable {
+class LightBulbV2 implements ISwitchable {
     @Override
     public void turnOn() {System.out.println("LightBulbV2 is ON"); }
 }
 
-class Fan implements Switchable {
+class Fan implements ISwitchable {
     @Override
     public void turnOn() {System.out.println("Fan is ON"); }
 }
 
 class SwitchV2 {
-    private Switchable device;
+    private ISwitchable device;
 
-    public SwitchV2(Switchable device) {
+    public SwitchV2(ISwitchable device) {
         this.device = device;
     }
 

@@ -4,14 +4,14 @@
 // But BasicPrinter only supports printing - it must throw exceptions for others
 // Clients using BasicPrinter are forced to depend on methods they can't use
 
-interface Machine {
+interface IMachine {
     // PROBLEM: One interface with too many unrelated methods
     void print();
     void scan();
     void fax();
 }
 
-class BasicPrinter implements Machine {
+class BasicPrinter implements IMachine {
     @Override
     public void print() {
         System.out.println("Printing...");
@@ -35,20 +35,20 @@ class BasicPrinter implements Machine {
 // A class implements ONLY the interfaces it actually supports
 
 // Segregated, focused interfaces
-interface Printer {
+interface IPrinter {
     void print();
 }
 
-interface Scanner {
+interface IScanner {
     void scan();
 }
 
-interface Fax {
+interface IFax {
     void fax();
 }
 
 // ✅ BasicPrinterV2 only implements what it supports
-class BasicPrinterV2 implements Printer {
+class BasicPrinterV2 implements IPrinter {
     @Override
     public void print() {
         // Can safely print
@@ -58,7 +58,7 @@ class BasicPrinterV2 implements Printer {
 }
 
 // ✅ MultiFunctionPrinter implements multiple segregated interfaces
-class MultiFunctionPrinter implements Printer, Scanner {
+class MultiFunctionPrinter implements IPrinter, IScanner {
     @Override
     public void print() {
         System.out.println("Printing...");
@@ -72,7 +72,7 @@ class MultiFunctionPrinter implements Printer, Scanner {
 }
 
 // ✅ FaxMachine implements only what it needs
-class FaxMachine implements Fax {
+class FaxMachine implements IFax {
     @Override
     public void fax() {
         System.out.println("Faxing...");
@@ -80,7 +80,7 @@ class FaxMachine implements Fax {
 }
 
 // ✅ NEW: Complete office device that can do everything
-class CompleteOfficeDevice implements Printer, Scanner, Fax {
+class CompleteOfficeDevice implements IPrinter, IScanner, IFax {
     @Override
     public void print() {
         System.out.println("Printing...");
@@ -101,7 +101,7 @@ class CompleteOfficeDevice implements Printer, Scanner, Fax {
 public class InterfaceSegregationPrinciple {
     // Benefit: Clients use only the interfaces they need
     // Example usage:
-    public void executePrintJob(Printer printer) {
+    public void executePrintJob(IPrinter printer) {
         // Only depends on Printer interface - doesn't care about scan or fax
         printer.print();
     }

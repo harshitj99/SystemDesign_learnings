@@ -2,11 +2,11 @@ package DesignPatterns.Creational.Abstract_Factory;
 
 // Client code — notice it never mentions a concrete class:
 public class Application {
-    private Button button;
-    private Checkbox checkbox;
+    private IButton button;
+    private ICheckbox checkbox;
 
      // client depends only on the abstract factory interface
-    Application(UIFactory factory){
+    Application(IUIFactory factory){
         this.button = factory.createButton();
         this.checkbox = factory.creatCheckbox();
     }
@@ -32,7 +32,7 @@ class Main{
     public static void main(String[] args) {
         String os = detectOS(); // e.g. reads system property
 
-        UIFactory factory = os.equals("windows") ? new WindowsUIFactory() : new MacUIFactory();
+        IUIFactory factory = os.equals("windows") ? new WindowsUIFactory() : new MacUIFactory();
 
         Application app = new Application(factory);
         app.renderUI();

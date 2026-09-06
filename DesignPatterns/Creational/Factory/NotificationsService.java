@@ -1,25 +1,25 @@
 package DesignPatterns.Creational.Factory;
 
 
-interface Notification{
+interface INotification{
     void send(String message);
 }
 
-class EmailNotification implements Notification{
+class EmailNotification implements INotification{
     @Override
     public void send(String message){
         System.out.println(message);
     }
 }
 
-class SMSNotification implements Notification{
+class SMSNotification implements INotification{
      @Override
     public void send(String message){
         System.out.println(message);
     }
 }
 
-class PushNotification implements Notification{
+class PushNotification implements INotification{
      @Override
     public void send(String message){
         System.out.println(message);

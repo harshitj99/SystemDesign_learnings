@@ -1,53 +1,53 @@
 package DesignPatterns.Creational.Abstract_Factory;
 
 // Abstract Products
-interface Button {
+interface IButton {
     void render();
 }
-interface Checkbox {
+interface ICheckbox {
     void render();
 }
 
 // Concrete Products — Windows family
-class WindowsButton implements Button {
+class WindowsButton implements IButton {
     public void render() { System.out.println("Rendering Windows-style button"); }
 }
-class WindowsCheckbox implements Checkbox {
+class WindowsCheckbox implements ICheckbox {
     public void render() { System.out.println("Rendering Windows-style checkbox"); }
 }
 
 // Concrete Products — Mac family
-class MacButton implements Button {
+class MacButton implements IButton {
     public void render() { System.out.println("Rendering Mac-style button"); }
 }
-class MacCheckbox implements Checkbox {
+class MacCheckbox implements ICheckbox {
     public void render() { System.out.println("Rendering Mac-style checkbox"); }
 }
 
 // Abstract Factory — declares creation for the ENTIRE family
-interface UIFactory{
-    Button createButton();
-    Checkbox creatCheckbox();
+interface IUIFactory{
+    IButton createButton();
+    ICheckbox creatCheckbox();
 }
 
 // Concrete Factory — Windows
-class WindowsUIFactory implements UIFactory{
-    public Button createButton(){
+class WindowsUIFactory implements IUIFactory{
+    public IButton createButton(){
         return new WindowsButton();
     }
 
-    public Checkbox creatCheckbox(){
+    public ICheckbox creatCheckbox(){
         return new WindowsCheckbox();
     }
 }
 
 // Concrete Factory — Mac
-class MacUIFactory implements UIFactory{
-    public Button createButton(){
+class MacUIFactory implements IUIFactory{
+    public IButton createButton(){
         return new MacButton();
     }
 
-    public Checkbox creatCheckbox(){
+    public ICheckbox creatCheckbox(){
         return new MacCheckbox();
     }
 }

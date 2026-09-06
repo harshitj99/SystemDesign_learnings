@@ -24,12 +24,12 @@ class PaymentProcessorViolation {
 // New payment methods are added by implementing the interface, not modifying existing code
 
 // Step 1: Define the contract that all payment methods must follow
-interface PaymentMethod {
+interface IPaymentMethod {
     void pay(double amount);
 }
 
 // Step 2: Implement each payment method by creating new classes
-class CreditCardPayment implements PaymentMethod {
+class CreditCardPayment implements IPaymentMethod {
     @Override
     public void pay(double amount) {
         // Specific implementation for credit card
@@ -37,7 +37,7 @@ class CreditCardPayment implements PaymentMethod {
     }
 }
 
-class PayPalPayment implements PaymentMethod {
+class PayPalPayment implements IPaymentMethod {
     @Override
     public void pay(double amount) {
         // Specific implementation for PayPal
@@ -45,7 +45,7 @@ class PayPalPayment implements PaymentMethod {
     }
 }
 
-class UPIPayment implements PaymentMethod {
+class UPIPayment implements IPaymentMethod {
     @Override
     public void pay(double amount) {
         // NEW METHOD: No need to modify PaymentProcessor!
@@ -56,10 +56,10 @@ class UPIPayment implements PaymentMethod {
 // Step 3: The PaymentProcessor uses composition with the interface
 // ✅ NOW CLOSED FOR MODIFICATION - No changes needed when adding new payment methods
 public class PaymentProcessor {
-    private PaymentMethod paymentMethod;
+    private IPaymentMethod paymentMethod;
 
     // Constructor injection - allows flexibility
-    public PaymentProcessor(PaymentMethod paymentMethod) {
+    public PaymentProcessor(IPaymentMethod paymentMethod) {
         this.paymentMethod = paymentMethod;
     }
 
