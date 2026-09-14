@@ -56,9 +56,17 @@ class PushNotificationCreator extends NotificationCreator{
     }
 }
 
+class NotificationApplication{
+    public NotificationApplication(NotificationCreator type){
+        type.notify("Pushed notification to service");
+    }
+}
+
 public class NotificationService {
 
     public static void main(String[] args) {
+
+        // NotificationApplication not = new NotificationApplication(new PushNotificationCreator());
         NotificationCreator email = new EmailNotificationCreator();
         email.notify("Your order has been shipped");
 
