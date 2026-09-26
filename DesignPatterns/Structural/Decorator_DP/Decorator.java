@@ -71,7 +71,7 @@ class WhippedCreamDecorator extends CoffeeDecorator{
 }
 public class Decorator {
     public static void main(String[] args) {
-        Coffee order = new SimpleCoffee();
+    Coffee order = new SimpleCoffee();
     System.out.println(order.description() + " = $" + order.cost());
     // Coffee = $2.0
 
@@ -83,5 +83,9 @@ public class Decorator {
     order = new WhippedCreamDecorator(order);
     System.out.println(order.description() + " = $" + order.cost());
     // Coffee + Milk + Sugar + Whipped Cream = $3.4
+
+    Coffee order2 = new WhippedCreamDecorator(new MilkDecorator(new SimpleCoffee()));
+    System.out.println(order2.description() + " = $" + order2.cost());
+
     }
 }
